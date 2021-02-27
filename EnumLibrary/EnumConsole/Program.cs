@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,10 +9,11 @@ using EnumLibrary;
 namespace EnumConsole
 {
     class Program
+    // + static: allows passing arguments / methods WITHIN the CLASS (usually not the instance)
+    //          so extensionmethods is allowed to be in the Program Class
     {
         static void Main(string[] args)
         {
-
             AssignPrintIncrement();
             Console.ReadKey();
             Parsing();
@@ -43,8 +45,6 @@ namespace EnumConsole
                 Console.WriteLine(mo.ToString());
             else
                 Console.WriteLine("That's not a month");
-
-
 
 
             string m2 = "5";
@@ -79,8 +79,8 @@ namespace EnumConsole
 
         static void IteratingFlags()
         {
-            Suits c = Suits.Hearts;
-            bool isRed = (c & Suits.Red) == c;
+            PokerSuits c = PokerSuits.Hearts;
+            bool isRed = (c & PokerSuits.Red) == c;
 
             Console.WriteLine("The card's suit is: {0}", c);
             Console.WriteLine("The card is red: {0}", isRed);
@@ -89,10 +89,15 @@ namespace EnumConsole
 
             for (int c2 = 0; c2 < 16; c2++)
             {
-                Suits s2 = (Suits)c2;
+                PokerSuits s2 = (PokerSuits)c2;
                 Console.WriteLine(s2);
-
             }
+        }
+
+        static void LongestRun()
+        {
+            List<int> 顺子 = new List<int> { 1, 2, 3, 4, 6, 7, 9 };
+            Debug.Assert(顺子.FindLongest() == 4);
         }
 
         static void ExtensionMethods()
@@ -104,6 +109,21 @@ namespace EnumConsole
             m = Months.December;
             n = m.NextMonthE();
             Console.WriteLine($"The month after {m:G} is {n:G}.");
+            m.extensionMethods();
         }
+    }
+    
+
+    public static class MyExtensionMethods
+    {
+        public static void extensionMethods(this Months m)
+        {       }
+
+        /*
+         * Consider the values of the enumerations and how they could be used to represent a run of cards 
+         * (i.e. checking for a sequence of consecutive values). 
+         * Develop an extension method to take a list of cards and to calculate the longest run in the list. 
+         */
+
     }
 }
