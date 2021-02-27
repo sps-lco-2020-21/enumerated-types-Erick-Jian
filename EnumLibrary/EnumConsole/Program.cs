@@ -96,7 +96,8 @@ namespace EnumConsole
 
         static void LongestRun()
         {
-            List<int> 顺子 = new List<int> { 1, 2, 3, 4, 6, 7, 9 };
+            List<PokerCards> 顺子 = new List<PokerCards> { PokerCards.Ace, PokerCards.Two, PokerCards.Three, 
+                                                           PokerCards.Queen, PokerCards.King, PokerCards.King };
             Debug.Assert(顺子.FindLongest() == 4);
         }
 

@@ -5,8 +5,8 @@ using System.Linq;
 
 /// <summary>
 /// List.where(eachiteminlist => eachiteminlist = 0);
-///     //bother rerurn new list of same type
-/// List.Select(eachitem => eachitem = 0);
+///     //bother return new list of same type
+/// List.Select(eachiteminlist => eachiteminlist = 0);
 /// </summary>
 namespace EnumLibrary
 {
@@ -29,7 +29,7 @@ namespace EnumLibrary
             // "with LINQ as your hammer, the world is full of nails"
         }
 
-        public static int FindLongest(this List<int> straight)
+        public static int FindLongest(this List<PokerCards> straight)
         {
             /* normally people find longest run by:
              *      1. have a implicit counter variable
@@ -41,14 +41,22 @@ namespace EnumLibrary
              */
 
             // step 1:
-            int current = 0, length = Convert.ToInt32(PokerCards.King);
+            int combo = 0;
+            int length = Convert.ToInt32(PokerCards.King);
             List<int> continuity = new List<int> {};
-            while (current <= length)  // less than length
+    // METHOD 1: iteration
+            for (int count = Convert.ToInt32(PokerCards.Ace); count < length; count++)  // less than length
             {
-            // step 2:
-                
-
+                while (straight[count] == straight[count + 1] - 1)
+                    combo ++;
+                continuity.Add(combo);
             }
+            return (continuity.Max());
+
+    // METHOD 2: LINQ
+            // for loop
+            //{ int current = straight[straight.IndexOf(count)];
+            //  method: continuity.Add(straight.Where(n => current = straight[straight.IndexOf(count) + 1]).ToList());  }
         }
     }
 
