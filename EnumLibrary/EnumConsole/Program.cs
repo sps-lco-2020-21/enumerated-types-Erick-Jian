@@ -98,7 +98,7 @@ namespace EnumConsole
         {
             List<PokerCards> 顺子 = new List<PokerCards> { PokerCards.Ace, PokerCards.Two, PokerCards.Three, 
                                                            PokerCards.Queen, PokerCards.King, PokerCards.King };
-            Debug.Assert(顺子.FindLongest() == 4);
+            Debug.Assert(顺子.FindLongest() == 3);
         }
 
         static void ExtensionMethods()

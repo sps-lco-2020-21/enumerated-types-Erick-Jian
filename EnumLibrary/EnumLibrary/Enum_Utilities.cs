@@ -43,20 +43,32 @@ namespace EnumLibrary
             // step 1:
             int combo = 0;
             int length = Convert.ToInt32(PokerCards.King);
+            List<int> PokerValue = straight.Select(x => (int)x).ToList();
+                                                     // casting       
+          
             List<int> continuity = new List<int> {};
-    // METHOD 1: iteration
-            for (int count = Convert.ToInt32(PokerCards.Ace); count < length; count++)  // less than length
+
+    // METHOD 3: Conversion + int list manipulation
+
+    // METHOD 1: iteration    
+        /*  for (int count = Convert.ToInt32(PokerCards.Ace); count < length; count++)  // less than length
             {
                 while (straight[count] == straight[count + 1] - 1)
                     combo ++;
                 continuity.Add(combo);
             }
-            return (continuity.Max());
+            return (continuity.Max());*/
 
     // METHOD 2: LINQ
             // for loop
             //{ int current = straight[straight.IndexOf(count)];
             //  method: continuity.Add(straight.Where(n => current = straight[straight.IndexOf(count) + 1]).ToList());  }
+        
+        /// Dealing with high/low Ace:  
+        ///     if statement check (if Ace.Next = Two || King.Next = Ace)
+        ///         combo ++;
+        ///     
+        /// 
         }
     }
 

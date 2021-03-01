@@ -10,7 +10,7 @@
     {
         January, February, March, April, May, June, July, August, September, October, November, December
     }
-    
+
     public enum PokerCards
     {
         Ace = 1, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King
