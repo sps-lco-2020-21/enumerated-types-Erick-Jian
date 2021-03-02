@@ -44,11 +44,12 @@ namespace EnumLibrary
             int combo = 0;
             int length = Convert.ToInt32(PokerCards.King);
             List<int> PokerValue = straight.Select(x => (int)x).ToList();
-                                                     // casting       
-          
+                                                     // casting     -- Also can use 
             List<int> continuity = new List<int> {};
-
+            
     // METHOD 3: Conversion + int list manipulation
+            continuity = PokerValue.Where(y => PokerValue[y] + 1 == PokerValue[y + 1]).ToList();
+            return continuity.Max();
 
     // METHOD 1: iteration    
         /*  for (int count = Convert.ToInt32(PokerCards.Ace); count < length; count++)  // less than length
@@ -67,7 +68,7 @@ namespace EnumLibrary
         /// Dealing with high/low Ace:  
         ///     if statement check (if Ace.Next = Two || King.Next = Ace)
         ///         combo ++;
-        ///     
+        ///     otherwise continue
         /// 
         }
     }
