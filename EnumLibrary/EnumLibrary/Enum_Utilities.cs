@@ -29,6 +29,7 @@ namespace EnumLibrary
             // "with LINQ as your hammer, the world is full of nails"
         }
 
+    // Task 2
         public static int FindLongest(this List<PokerCards> straight)
         {
             /* normally people find longest run by:
@@ -40,18 +41,23 @@ namespace EnumLibrary
              *      6. compare the counter value and find largest
              */
 
+    // METHOD 1: LINQ
             // step 1:
             int combo = 0;
             int length = Convert.ToInt32(PokerCards.King);
             List<int> PokerValue = straight.Select(x => (int)x).ToList();
-                                                     // casting     -- Also can use 
-            List<int> continuity = new List<int> {};
-            
-    // METHOD 3: Conversion + int list manipulation
-            continuity = PokerValue.Where(y => PokerValue[y] + 1 == PokerValue[y + 1]).ToList();
-            return continuity.Max();
+                                                     // casting     -- Also can use Convert.ToInt32
+            List<int> continuityMax = new List<int> {};
+            List<int> continuityMin = new List<int> {};     // these are unnecessary -- I could've just create new list at LINQ
 
-    // METHOD 1: iteration    
+            // METHOD 3: Conversion + int list manipulation
+            continuityMax = PokerValue.Where(y => PokerValue[y] + 1 != PokerValue[y + 1]).ToList();    // largest number in any run
+            continuityMin = PokerValue.Where(z => PokerValue[z] - 1 != PokerValue[z - 1]).ToList();    // smallest number in any run
+            var RunLength = continuityMax.Zip(continuityMin, (first, second) => first - second);                        
+
+            return (RunLength.Max() + 1);
+
+    // METHOD 2: iteration    
         /*  for (int count = Convert.ToInt32(PokerCards.Ace); count < length; count++)  // less than length
             {
                 while (straight[count] == straight[count + 1] - 1)
@@ -60,11 +66,8 @@ namespace EnumLibrary
             }
             return (continuity.Max());*/
 
-    // METHOD 2: LINQ
-            // for loop
-            //{ int current = straight[straight.IndexOf(count)];
-            //  method: continuity.Add(straight.Where(n => current = straight[straight.IndexOf(count) + 1]).ToList());  }
-        
+    // METHOD 3: recursion ???
+
         /// Dealing with high/low Ace:  
         ///     if statement check (if Ace.Next = Two || King.Next = Ace)
         ///         combo ++;
@@ -73,11 +76,16 @@ namespace EnumLibrary
         }
     }
 
+    // Task 4
     public static class CardUtilities
     {
-        public static PokerCards CardStack(PokerCards stack)
+        /// <summary>
+        /// Write an extension method for a string that converts a two character string where the first character 
+        ///     is the value and the second the suit, into your Card. E.g. KD is the King of Diamonds, TH the Ten of Hearts, 5C the Five of Clubs. 
+        /// </summary>
+        public static string PokerCards CardStack(PokerCards stack, PokerSuits type)
         {
-            return stack;
+            return stack.ToString;
         }
     }
 }
